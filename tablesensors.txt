@@ -1,0 +1,35 @@
+Successfully connected to database: eidb on 127.0.0.1
+eidbThe array is :
+name=id
+name=fid_measurement
+name=oid
+name=timestamp_UTC
+name=value_payload
+name=Device_ID
+name=Protocol_version
+name=Air_temperature_value
+name=Air_temperature_unit
+name=Air_humidity_value
+name=Air_humidity_unit
+name=Barometer_temperature_value
+name=Barometer_temperature_unit
+name=Barometric_pressure_value
+name=Barometric_pressure_unit
+name=CO2_concentration_value
+name=CO2_concentration_unit
+name=CO2_concentration_LPF_value
+name=CO2_concentration_LPF_unit
+name=CO2_sensor_temperature_value
+name=CO2_sensor_temperature_unit
+name=Capacitor_voltage_1_value
+name=Capacitor_voltage_1_unit
+name=Capacitor_voltage_2_value
+name=Capacitor_voltage_2_unit
+name=CO2_sensor_status_value
+name=CO2_sensor_status_unit
+name=Raw_IR_reading_value
+name=Raw_IR_reading_unit
+name=Raw_IR_reading_LPF_value
+name=Raw_IR_reading_LPF_unit
+name=Battery_voltage_value
+name=Battery_voltage_unit
