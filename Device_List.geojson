@@ -1,0 +1,55 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Device_ID": 13010, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.046104146, 47.23921582 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13011, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.033761963, 47.32524852 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13012, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.051834028, 47.27257554 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13013, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.053558851, 47.28438358 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13014, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.03001386, 47.29986124 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13015, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.051030176, 47.24271594 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13016, "Start": "01/01/2022", "End": "30/04/2022" }, "geometry": { "type": "Point", "coordinates": [ 4.993090012, 47.30114935 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13016, "Start": "01/05/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 4.993356696, 47.27759682 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13017, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.012264553, 47.25974511 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13018, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.04527377, 47.25805412 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13019, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 5.007905783, 47.25164672 ] } },
+{ "type": "Feature", "properties": { "Device_ID": 13020, "Start": "01/01/2022", "End": "16/06/2022" }, "geometry": { "type": "Point", "coordinates": [ 4.98967875, 47.27088684 ] } }
+]
+}
+
+CREATE TABLE type_coord(
+	id_coord integer PRIMARY KEY,
+	name varchar(100)
+);
+
+CREATE TABLE devices (
+	device_id integer PRIMARY KEY
+);
+
+CREATE TABLE devices_pos (
+	id_dev_pos integer PRIMARY KEY,
+	startd date,
+	endd date,
+	type_geom varchar(20),
+	geom geometry,
+	device_id integer
+
+);
+INSERT INTO type_coord VALUES ( 1, 'urn:ogc:def:crs:OGC:1.3:CRS84' );
+INSERT INTO devices VALUES(13010), (13011), (13012), (13013), (13014), (13015), (13016), (13017), (13018), (13019), (13020);
+
+INSERT INTO devices_pos VALUES ( 1, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.046104146 47.23921582)', 13010),
+		 	   ( 2, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.033761963 47.32524852)', 13011),
+			   ( 3, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.051834028 47.27257554)', 13012),
+( 4, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.053558851 47.28438358)', 13013),
+( 5, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.03001386 47.29986124)', 13014),
+( 6, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.051030176 47.24271594)', 13015),
+( 7, '2022-01-01', '2022-04-30', 'Point', 'POINT(4.993090012 47.30114935)', 13016),
+( 8, '2022-05-01', '2022-06-16', 'Point', 'POINT(4.993356696 47.27759682)', 13016),
+( 9, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.012264553 47.25974511)', 13017),
+( 10, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.04527377 47.25805412)', 13018),
+( 11, '2022-01-01', '2022-06-16', 'Point', 'POINT(5.007905783 47.25164672)', 13019),
+( 12, '2022-01-01', '2022-06-16', 'Point', 'POINT(4.98967875 47.27088684)', 13020);
+
+
+
