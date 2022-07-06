@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DevicesController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #FF0000; padding: 2px 6px; }
+    
+</style>
+<div id="exemple" data-devices="{{ devices|json_encode }}" data-status="{{ status|json_encode }}" ></div>
+<div class="example-wrapper">
+    <center><h1>Devices list</h1></center>
+    {% set index = 0 %}
+    {% for dev in devices %}
+    <div class="box_device"  
+	{% if status[index] == 'no active' %}
+		style="background-color:red;"
+	{% endif %}
+    >
+    <img src="{{ asset('build/image/capteur.jpg') }}" alt="capteur" width="75" height="100" style="float:left;margin:20px 20px 0px 20px;" />
+    <div id="dev" style="top:15px;">
+    
+    {% if status[index] == 'active' %}
+	<h1 style="height:25px;"> Device :<a href="./device/{{ dev['device_id'] }}/{{ dev['st_x'] }}/{{ dev['st_y'] }}"> {{ dev['device_id'] }}</a> </h1>
+	<h5 style="height:10px;">Date: {{ dev['startd'] }} to {{ dev['endd'] }}</h5>
+    {% else %}
+	<h1 style="height:25px;"> Device : {{ dev['device_id'] }} </h1>
+	<h5 style="height:10px;">Date: {{ dev['startd'] }} to {{ dev['endd'] }} - no active</h5>
+    {% endif %}
+    
+    
+    <h5 style="height:10px;">Position: {{ dev['st_x'] }} - {{ dev['st_y'] }}</h5>
+    </div>
+    </div>
+    {% set index = index + 1 %}
+    {% endfor %}
+   
+</div>
+{% endblock %}

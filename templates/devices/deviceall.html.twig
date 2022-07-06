@@ -1,0 +1,260 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DevicesController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    
+</style>
+
+<a href="./../../../devices">Home</a>
+<div class="example-wrapper">
+    <div class="box_device_set">
+    <h1>All devices</h1>
+    <h3> Avg temp : {{ avg_temp|number_format(2, '.', ',') }} {{ devices[0]['air_temp'][0]['air_temperature_unit']|slice(1,2) }}  </h3>
+    <h3> Avg humidity: {{ avg_hum|number_format(2, '.', ',') }} {{ devices[0]['air_hum'][0]['air_humidity_unit'] }} </h3>
+    <h3> Avg CO2: {{ avg_co2|number_format(2, '.', ',') }} {{ devices[0]['co2_conc'][0]['co2_concentration_unit'] }} </h3>
+    <h3> Avg Pressure: {{ avg_press|number_format(2, '.', ',') }} {{ devices[0]['pressure'][0]['barometric_pressure_unit'] }}</h3>
+    </div>
+   
+</div>
+<div id="chartline">
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+		var tab = [['Time',
+		{% set indev = 0 %}
+		{% for dev in  devices %}
+			{% if status[indev] == 'active' %}
+			 '{{ dev['device'][0]['device_id'] }}' , 
+			{% endif %}
+			{% set indev = indev+ 1  %}
+		{% endfor %}
+		]];
+		{% set unit = 1 %}
+		//{{ count_temp }}
+		{% set in = 0 %}
+		{% set index = 0 %}	
+		{% set maxi = count_temp %}
+		{% for a in 0..count_temp-1 %}
+			{% set in = devices[0]['air_temp']|length %}
+			
+			
+			tab.push(['{{ devices[0]['air_temp'][0]['to_timestamp'] }}',
+			{% set indev = 0 %}
+			{% for dev in  devices %}
+				{% if status[indev] == 'active' %}
+				{% set unit = devices[indev]['air_temp'][index]['air_temperature_unit'] %}
+								
+				 {{ devices[indev]['air_temp'][index]['air_temperature_value'] }},
+				{% endif %}
+				{% set indev = indev+ 1  %}
+			{% endfor %}
+			]);
+			
+			{% set index = index + 1 %}	
+		{% endfor %}
+		//{{ in }}
+        var data = google.visualization.arrayToDataTable(
+		tab
+	);
+
+        var options = {
+	  title: 'Air Temperature {{ unit|slice(1, 2) }}',
+      	  curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+
+
+     
+    </script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+		var tab = [['Time',
+		{% set indev = 0 %}
+		{% for dev in  devices %}
+			{% if status[indev] == 'active' %}
+			 '{{ dev['device'][0]['device_id'] }}' , 
+			{% endif %}
+			{% set indev = indev+ 1  %}
+		{% endfor %}
+		]];
+		{% set unit = 1 %}
+		//{{ count_temp }}
+		{% set in = 0 %}
+		{% set index = 0 %}	
+		{% set maxi = count_temp %}
+		{% for a in 0..count_temp-1 %}
+			{% set in = devices[0]['air_hum']|length %}
+			
+			
+			tab.push(['{{ devices[0]['air_hum'][0]['to_timestamp'] }}',
+			{% set indev = 0 %}
+			{% for dev in  devices %}
+				{% if status[indev] == 'active' %}
+				{% set unit = devices[indev]['air_hum'][index]['air_humidity_unit'] %}
+								
+				 {{ devices[indev]['air_hum'][index]['air_humidity_value'] }},
+				{% endif %}
+				{% set indev = indev+ 1  %}
+			{% endfor %}
+			]);
+			
+			{% set index = index + 1 %}	
+		{% endfor %}
+
+        var data = google.visualization.arrayToDataTable(
+		tab
+	);
+
+        var options = {
+          title: 'Air Humidity {{ unit }}',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_ahum'));
+
+        chart.draw(data, options);
+      }
+
+
+     
+    </script>
+
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+		var tab = [['Time',
+		{% set indev = 0 %}
+		{% for dev in  devices %}
+			{% if status[indev] == 'active' %}
+			 '{{ dev['device'][0]['device_id'] }}' , 
+			{% endif %}
+			{% set indev = indev+ 1  %}
+		{% endfor %}
+		]];
+		{% set unit = 1 %}
+		//{{ count_temp }}
+		{% set in = 0 %}
+		{% set index = 0 %}	
+		{% set maxi = count_temp %}
+		{% for a in 0..count_temp-1 %}
+			{% set in = devices[0]['co2_conc']|length %}
+			
+			
+			tab.push(['{{ devices[0]['co2_conc'][0]['to_timestamp'] }}',
+			{% set indev = 0 %}
+			{% for dev in  devices %}
+				{% if status[indev] == 'active' %}
+				{% set unit = devices[indev]['co2_conc'][index]['co2_concentration_unit'] %}
+								
+				 {{ devices[indev]['co2_conc'][index]['co2_concentration_value'] }},
+				{% endif %}
+				{% set indev = indev+ 1  %}
+			{% endfor %}
+			]);
+			
+			{% set index = index + 1 %}	
+		{% endfor %}
+
+        var data = google.visualization.arrayToDataTable(
+		tab
+	);
+
+        var options = {
+          title: 'C02 concentration {{ unit }}',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_co2cc'));
+
+        chart.draw(data, options);
+      }
+
+
+     
+    </script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+		var tab = [['Time',
+		{% set indev = 0 %}
+		{% for dev in  devices %}
+			{% if status[indev] == 'active' %}
+			 '{{ dev['device'][0]['device_id'] }}' , 
+			{% endif %}
+			{% set indev = indev+ 1  %}
+		{% endfor %}
+		]];
+		{% set unit = 1 %}
+		//{{ count_temp }}
+		{% set in = 0 %}
+		{% set index = 0 %}	
+		{% set maxi = count_temp %}
+		{% for a in 0..count_temp-1 %}
+			{% set in = devices[0]['pressure']|length %}
+			
+			
+			tab.push(['{{ devices[0]['pressure'][0]['to_timestamp'] }}',
+			{% set indev = 0 %}
+			{% for dev in  devices %}
+				{% if status[indev] == 'active' %}
+				{% set unit = devices[indev]['pressure'][index]['barometric_pressure_unit'] %}
+								
+				 {{ devices[indev]['pressure'][index]['barometric_pressure_value'] }},
+				{% endif %}
+				{% set indev = indev+ 1  %}
+			{% endfor %}
+			]);
+			
+			{% set index = index + 1 %}	
+		{% endfor %}
+	
+        var data = google.visualization.arrayToDataTable(
+		tab
+	);
+
+        var options = {
+          title: 'Pressure {{ unit }}',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_press'));
+
+        chart.draw(data, options);
+      }
+
+
+     
+    </script>
+
+
+<div class="chart"><div id="curve_chart" style="width: 900px; height: 500px"></div></div>
+<div class="chart"><div id="curve_chart_ahum" style="width: 900px; height: 500px"></div></div>
+<div class="chart"><div id="curve_chart_co2cc" style="width: 900px; height: 500px"></div></div>
+<div class="chart"><div id="curve_chart_press" style="width: 900px; height: 500px"></div></div>
+</div>
+
+{% endblock %}
