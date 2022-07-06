@@ -44,7 +44,7 @@
 			{% set in = devices[0]['air_temp']|length %}
 			
 			
-			tab.push(['{{ devices[0]['air_temp'][0]['to_timestamp'] }}',
+			tab.push(['{{ devices[0]['air_temp'][index]['to_timestamp'] }}',
 			{% set indev = 0 %}
 			{% for dev in  devices %}
 				{% if status[indev] == 'active' %}
@@ -101,7 +101,7 @@
 			{% set in = devices[0]['air_hum']|length %}
 			
 			
-			tab.push(['{{ devices[0]['air_hum'][0]['to_timestamp'] }}',
+			tab.push(['{{ devices[0]['air_hum'][index]['to_timestamp'] }}',
 			{% set indev = 0 %}
 			{% for dev in  devices %}
 				{% if status[indev] == 'active' %}
@@ -159,7 +159,7 @@
 			{% set in = devices[0]['co2_conc']|length %}
 			
 			
-			tab.push(['{{ devices[0]['co2_conc'][0]['to_timestamp'] }}',
+			tab.push(['{{ devices[0]['co2_conc'][index]['to_timestamp'] }}',
 			{% set indev = 0 %}
 			{% for dev in  devices %}
 				{% if status[indev] == 'active' %}
@@ -216,7 +216,7 @@
 			{% set in = devices[0]['pressure']|length %}
 			
 			
-			tab.push(['{{ devices[0]['pressure'][0]['to_timestamp'] }}',
+			tab.push(['{{ devices[0]['pressure'][index]['to_timestamp'] }}',
 			{% set indev = 0 %}
 			{% for dev in  devices %}
 				{% if status[indev] == 'active' %}
