@@ -2,7 +2,7 @@
 
 ## 1. Alpine docker project
 
-It's a docker project with alpine plus **php+postgres+symfony+react** project. The image is ready, but the project is in construction.
+It's a docker project with alpine plus **php+postgres+symfony+react** project. The image is ready, and the main symfony folder with the project file are here like assets, templates ... .
 
 ## 2. How it works !!!
 
